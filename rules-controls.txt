@@ -1,0 +1,4 @@
+w-a-s-d to move
+traps reset your player to beginning
+wormhole teleports your player
+get to the top to score

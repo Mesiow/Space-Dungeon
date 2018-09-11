@@ -19,12 +19,13 @@ public:
 	}
 
 public:
-	inline static constexpr char getSymbol() { return trap; }
-	inline int &getPosX() { return x; }
-	inline int &getPosY() { return y; }
+	inline int getPosX() { return x; }
+	inline int getPosY() { return y; }
+
+public:
+	static constexpr char trap = 'T';
 
 private:
-	static constexpr char trap = 'T';
 	int x, y;
 
 };

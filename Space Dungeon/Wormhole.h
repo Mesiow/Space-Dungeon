@@ -10,11 +10,12 @@ public:
 	}
 
 public:
-	inline static constexpr char getSymbol() { return wormhole; }
 	inline int getPosX() { return x; }
 	inline int getPosY() { return y; }
 
-private:
+public:
 	static constexpr char wormhole = 'W';
+
+private:
 	int x, y;
 };

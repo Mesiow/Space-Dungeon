@@ -1,3 +1,6 @@
-﻿  World.cpp
+﻿  Game.cpp
+  World.cpp
 c:\users\mesio\desktop\visual studio c++ projects\console space dungeon crawler\space dungeon\space dungeon\world.cpp(6): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  main.cpp
+  Generating Code...
   Space Dungeon.vcxproj -> C:\Users\Mesio\Desktop\Visual Studio C++ Projects\Console Space Dungeon Crawler\Space Dungeon\Debug\Space Dungeon.exe

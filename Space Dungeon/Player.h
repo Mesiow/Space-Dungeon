@@ -21,12 +21,13 @@ public:
 	}
 
 public:
-	inline static constexpr char getSymbol() { return player; }
 	inline int getXPos()const { return xpos; }
 	inline int getYPos()const { return ypos; }
 
-private:
+public:
 	static constexpr char player = 'P';
+
+private:
 	int xpos;
 	int ypos;
 

@@ -30,7 +30,7 @@ void World::init()
 		}
 	}
 
-	setEntityPosition(player->getXPos(), player->getYPos(), player->getSymbol());
+	setEntityPosition(player->getXPos(), player->getYPos(), Player::player);
 
 	for (int i = 0; i < ROW; i++) //generate traps
 	{
@@ -46,10 +46,10 @@ void World::init()
 	}
 
 	for (unsigned i = 0; i < traps.size(); i++)
-		setEntityPosition(traps[i].getPosX(), traps[i].getPosY(), traps[i].getSymbol()); //set trap pos after creating them
+		setEntityPosition(traps[i].getPosX(), traps[i].getPosY(), Trap::trap); //set trap pos after creating them
 
-	setEntityPosition(entrance->getPosX(), entrance->getPosY(), entrance->getSymbol());
-	setEntityPosition(exit->getPosX(), exit->getPosY(), exit->getSymbol());
+	setEntityPosition(entrance->getPosX(), entrance->getPosY(), Wormhole::wormhole);
+	setEntityPosition(exit->getPosX(), exit->getPosY(), Wormhole::wormhole);
 
 
 	initCollision();
@@ -76,17 +76,17 @@ void World::initCollision() //check spawn collisions, called once
 		int trapY = traps[i].getPosY();
 
 		if (grid[playerX][playerY] == grid[trapX][trapY]) //check if trap overlaps player when starting game
-			grid[playerX][playerY] = 'P';
+			grid[playerX][playerY] = Player::player;
 		
 		if (grid[trapX][trapY] == grid[wormX][wormY]) 
 		{
-			grid[trapX][trapY] = 'W';
+			grid[trapX][trapY] = Wormhole::wormhole;
 			traps.erase(traps.begin() + i);
 		}
 	}
 
 	if (grid[playerX][playerY] == grid[wormX][wormY]) //if player spawns on wormhole move it up 1
-		grid[wormX - 1][wormY] = 'W';
+		grid[wormX - 1][wormY] = Wormhole::wormhole;
 
 	
 
@@ -110,14 +110,14 @@ void World::enemyMovement()
 
 		if (random == 5)
 		{
-			grid[trapX][trapY - 1]=traps[i].getSymbol();
+			grid[trapX][trapY - 1]=Trap::trap;
 			grid[trapX][trapY] = '.';
 			traps[i].setPosY(trapY - 1); //have position follow trap
 			
 		}
 		else if (random == 3)
 		{
-			grid[trapX][trapY + 1] = traps[i].getSymbol();
+			grid[trapX][trapY + 1] = Trap::trap;
 			grid[trapX][trapY] = '.';
 			traps[i].setPosY(trapY + 1);
 		}
@@ -128,7 +128,7 @@ void World::addScore()
 {
 	for (int i = 0; i < COLUMN; i++) //if player reaches top we get a point
 	{
-		if (grid[0][i] == player->getSymbol())
+		if (grid[0][i] == Player::player)
 		{
 			score++;
 			reset();
@@ -158,7 +158,7 @@ void World::collision() //check for collisions every frame
 			int x = player->getXPos();
 			int y = player->getYPos();
 
-			grid[x][y] = 'P';
+			grid[x][y] = Player::player;
 
 			//delete trap after we step into it
 			traps.erase(traps.begin() + i);
@@ -167,7 +167,7 @@ void World::collision() //check for collisions every frame
 
 		if (grid[trapX][trapY] == grid[wormX][wormY]) // check if trap overlaps wormhole entrance or exit and change the wormhole to trap and collapse both holes
 		{
-			grid[trapX][trapY] = 'T';
+			grid[trapX][trapY] = Trap::trap;
 		}
 	}
 	   
@@ -179,7 +179,7 @@ void World::collision() //check for collisions every frame
 
 		player->setPosition(wX, wY);
 
-		grid[wX][wY] = 'P';
+		grid[wX][wY] = Player::player;
 		grid[playerX][playerY] = '.';
 		grid[wormX][wormY] = '.';
 	}
@@ -209,28 +209,28 @@ void World::input()
 	switch (input)
 	{
 	case 'w':
-		grid[playerX - 1][playerY] = player->getSymbol();
+		grid[playerX - 1][playerY] = Player::player;
 		grid[playerX][playerY] = '.';
 
 		player->setPosX(playerX - 1);  //update player position
 		break;
 
 	case 'a':
-		grid[playerX][playerY - 1] = player->getSymbol();
+		grid[playerX][playerY - 1] = Player::player;
 		grid[playerX][playerY] = '.';
 
 		player->setPosY(playerY - 1);
 		break;
 
 	case 's':
-		grid[playerX + 1][playerY] = player->getSymbol();
+		grid[playerX + 1][playerY] = Player::player;
 		grid[playerX][playerY] = '.';
 
 		player->setPosX(playerX + 1);
 		break;
 
 	case 'd':
-		grid[playerX][playerY + 1] = player->getSymbol();
+		grid[playerX][playerY + 1] = Player::player;
 		grid[playerX][playerY] = '.';
 
 		player->setPosY(playerY + 1);
